@@ -8,10 +8,11 @@
     <result column="ball2" property="ball2" jdbcType="INTEGER" />
     <result column="ball3" property="ball3" jdbcType="INTEGER" />
     <result column="ball_sum" property="ballSum" jdbcType="INTEGER" />
+    <result column="award_type" property="awardType" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, lottery_no, ball1, ball2, ball3, ball_sum, create_time
+    id, lottery_no, ball1, ball2, ball3, ball_sum, award_type, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="QuickThreeLottery" >
     insert into tbl_quick_three_lottery (id, lottery_no, ball1, 
       ball2, ball3, ball_sum, 
-      create_time)
+      award_type, create_time)
     values (#{id,jdbcType=INTEGER}, #{lotteryNo,jdbcType=INTEGER}, #{ball1,jdbcType=INTEGER}, 
       #{ball2,jdbcType=INTEGER}, #{ball3,jdbcType=INTEGER}, #{ballSum,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{awardType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="QuickThreeLottery" >
     insert into tbl_quick_three_lottery
@@ -51,6 +52,9 @@
       </if>
       <if test="ballSum != null" >
         ball_sum,
+      </if>
+      <if test="awardType != null" >
+        award_type,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -75,6 +79,9 @@
       <if test="ballSum != null" >
         #{ballSum,jdbcType=INTEGER},
       </if>
+      <if test="awardType != null" >
+        #{awardType,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -98,6 +105,9 @@
       <if test="ballSum != null" >
         ball_sum = #{ballSum,jdbcType=INTEGER},
       </if>
+      <if test="awardType != null" >
+        award_type = #{awardType,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -111,6 +121,7 @@
       ball2 = #{ball2,jdbcType=INTEGER},
       ball3 = #{ball3,jdbcType=INTEGER},
       ball_sum = #{ballSum,jdbcType=INTEGER},
+      award_type = #{awardType,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

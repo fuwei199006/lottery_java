@@ -15,6 +15,8 @@ public class QuickThreeLottery {
 
     private Integer ballSum;
 
+    private String awardType;
+
     private Date createTime;
 
     public Integer getId() {
@@ -63,6 +65,14 @@ public class QuickThreeLottery {
 
     public void setBallSum(Integer ballSum) {
         this.ballSum = ballSum;
+    }
+
+    public String getAwardType() {
+        return awardType;
+    }
+
+    public void setAwardType(String awardType) {
+        this.awardType = awardType == null ? null : awardType.trim();
     }
 
     public Date getCreateTime() {
