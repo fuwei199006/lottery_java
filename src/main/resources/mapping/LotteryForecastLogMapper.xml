@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.LotteryForecastLogMapper" >
+  <resultMap id="BaseResultMap" type="LotteryForecastLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="lottery_no" property="lotteryNo" jdbcType="INTEGER" />
+    <result column="forecast_method" property="forecastMethod" jdbcType="INTEGER" />
+    <result column="red_ball1" property="redBall1" jdbcType="VARCHAR" />
+    <result column="red_ball2" property="redBall2" jdbcType="VARCHAR" />
+    <result column="red_ball3" property="redBall3" jdbcType="VARCHAR" />
+    <result column="red_ball4" property="redBall4" jdbcType="VARCHAR" />
+    <result column="red_ball5" property="redBall5" jdbcType="VARCHAR" />
+    <result column="red_ball6" property="redBall6" jdbcType="VARCHAR" />
+    <result column="blue_ball" property="blueBall" jdbcType="VARCHAR" />
+    <result column="item_count" property="itemCount" jdbcType="INTEGER" />
+    <result column="award_class" property="awardClass" jdbcType="VARCHAR" />
+    <result column="award_amount" property="awardAmount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, lottery_no, forecast_method, red_ball1, red_ball2, red_ball3, red_ball4, red_ball5, 
+    red_ball6, blue_ball, item_count, award_class, award_amount, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_lottery_forecast_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_lottery_forecast_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="LotteryForecastLog" >
+    insert into tbl_lottery_forecast_log (id, lottery_no, forecast_method, 
+      red_ball1, red_ball2, red_ball3, 
+      red_ball4, red_ball5, red_ball6, 
+      blue_ball, item_count, award_class, 
+      award_amount, create_time)
+    values (#{id,jdbcType=BIGINT}, #{lotteryNo,jdbcType=INTEGER}, #{forecastMethod,jdbcType=INTEGER}, 
+      #{redBall1,jdbcType=VARCHAR}, #{redBall2,jdbcType=VARCHAR}, #{redBall3,jdbcType=VARCHAR}, 
+      #{redBall4,jdbcType=VARCHAR}, #{redBall5,jdbcType=VARCHAR}, #{redBall6,jdbcType=VARCHAR}, 
+      #{blueBall,jdbcType=VARCHAR}, #{itemCount,jdbcType=INTEGER}, #{awardClass,jdbcType=VARCHAR}, 
+      #{awardAmount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="LotteryForecastLog" >
+    insert into tbl_lottery_forecast_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lotteryNo != null" >
+        lottery_no,
+      </if>
+      <if test="forecastMethod != null" >
+        forecast_method,
+      </if>
+      <if test="redBall1 != null" >
+        red_ball1,
+      </if>
+      <if test="redBall2 != null" >
+        red_ball2,
+      </if>
+      <if test="redBall3 != null" >
+        red_ball3,
+      </if>
+      <if test="redBall4 != null" >
+        red_ball4,
+      </if>
+      <if test="redBall5 != null" >
+        red_ball5,
+      </if>
+      <if test="redBall6 != null" >
+        red_ball6,
+      </if>
+      <if test="blueBall != null" >
+        blue_ball,
+      </if>
+      <if test="itemCount != null" >
+        item_count,
+      </if>
+      <if test="awardClass != null" >
+        award_class,
+      </if>
+      <if test="awardAmount != null" >
+        award_amount,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="lotteryNo != null" >
+        #{lotteryNo,jdbcType=INTEGER},
+      </if>
+      <if test="forecastMethod != null" >
+        #{forecastMethod,jdbcType=INTEGER},
+      </if>
+      <if test="redBall1 != null" >
+        #{redBall1,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall2 != null" >
+        #{redBall2,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall3 != null" >
+        #{redBall3,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall4 != null" >
+        #{redBall4,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall5 != null" >
+        #{redBall5,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall6 != null" >
+        #{redBall6,jdbcType=VARCHAR},
+      </if>
+      <if test="blueBall != null" >
+        #{blueBall,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCount != null" >
+        #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="awardClass != null" >
+        #{awardClass,jdbcType=VARCHAR},
+      </if>
+      <if test="awardAmount != null" >
+        #{awardAmount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="LotteryForecastLog" >
+    update tbl_lottery_forecast_log
+    <set >
+      <if test="lotteryNo != null" >
+        lottery_no = #{lotteryNo,jdbcType=INTEGER},
+      </if>
+      <if test="forecastMethod != null" >
+        forecast_method = #{forecastMethod,jdbcType=INTEGER},
+      </if>
+      <if test="redBall1 != null" >
+        red_ball1 = #{redBall1,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall2 != null" >
+        red_ball2 = #{redBall2,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall3 != null" >
+        red_ball3 = #{redBall3,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall4 != null" >
+        red_ball4 = #{redBall4,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall5 != null" >
+        red_ball5 = #{redBall5,jdbcType=VARCHAR},
+      </if>
+      <if test="redBall6 != null" >
+        red_ball6 = #{redBall6,jdbcType=VARCHAR},
+      </if>
+      <if test="blueBall != null" >
+        blue_ball = #{blueBall,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCount != null" >
+        item_count = #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="awardClass != null" >
+        award_class = #{awardClass,jdbcType=VARCHAR},
+      </if>
+      <if test="awardAmount != null" >
+        award_amount = #{awardAmount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="LotteryForecastLog" >
+    update tbl_lottery_forecast_log
+    set lottery_no = #{lotteryNo,jdbcType=INTEGER},
+      forecast_method = #{forecastMethod,jdbcType=INTEGER},
+      red_ball1 = #{redBall1,jdbcType=VARCHAR},
+      red_ball2 = #{redBall2,jdbcType=VARCHAR},
+      red_ball3 = #{redBall3,jdbcType=VARCHAR},
+      red_ball4 = #{redBall4,jdbcType=VARCHAR},
+      red_ball5 = #{redBall5,jdbcType=VARCHAR},
+      red_ball6 = #{redBall6,jdbcType=VARCHAR},
+      blue_ball = #{blueBall,jdbcType=VARCHAR},
+      item_count = #{itemCount,jdbcType=INTEGER},
+      award_class = #{awardClass,jdbcType=VARCHAR},
+      award_amount = #{awardAmount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

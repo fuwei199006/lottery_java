@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.db.mybatis.dao.LotteryMapper">
+    <resultMap id="BaseResultMap" type="Lottery">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="lottery_no" jdbcType="INTEGER" property="lotteryNo" />
+        <result column="lottery_date" jdbcType="VARCHAR" property="lotteryDate" />
+        <result column="red_ball1" jdbcType="VARCHAR" property="redBall1" />
+        <result column="red_ball2" jdbcType="VARCHAR" property="redBall2" />
+        <result column="red_ball3" jdbcType="VARCHAR" property="redBall3" />
+        <result column="red_ball4" jdbcType="VARCHAR" property="redBall4" />
+        <result column="red_ball5" jdbcType="VARCHAR" property="redBall5" />
+        <result column="red_ball6" jdbcType="VARCHAR" property="redBall6" />
+        <result column="blue_ball" jdbcType="VARCHAR" property="blueBall" />
+        <result column="first_items" jdbcType="BIGINT" property="firstItems" />
+        <result column="first_award" jdbcType="BIGINT" property="firstAward" />
+        <result column="second_items" jdbcType="BIGINT" property="secondItems" />
+        <result column="second_award" jdbcType="BIGINT" property="secondAward" />
+        <result column="total_award" jdbcType="BIGINT" property="totalAward" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+   id, lottery_no, lottery_date, red_ball1, red_ball2, red_ball3, red_ball4, red_ball5,
+    red_ball6, blue_ball, first_items, first_award, second_items, second_award, total_award,
+    create_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_lottery
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectListById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_lottery
+        where id > #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectListByRange" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_lottery
+        where id > #{arg0,jdbcType=INTEGER} and id&lt; #{arg1,jdbcType=INTEGER}
+    </select>
+    <select id="selectByLotteryNo" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_lottery
+        where lottery_no = #{lottery_no,jdbcType=INTEGER}
+    </select>
+    <select id="selectListByLotteryDate" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_lottery
+        where lottery_date > #{lottery_date,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByLotteryDate" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_lottery
+        where lottery_date = #{lottery_date,jdbcType=VARCHAR}
+    </select>
+    <select id="selectMaxId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        max(id)
+        from tbl_lottery
+        where lottery_date = #{lottery_date,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_lottery
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="Lottery">
+    insert into tbl_lottery (id, lottery_no, lottery_date,
+      red_ball1, red_ball2, red_ball3,
+      red_ball4, red_ball5, red_ball6,
+      blue_ball, first_items, first_award,
+      second_items, second_award, total_award,
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{lotteryNo,jdbcType=INTEGER}, #{lotteryDate,jdbcType=VARCHAR},
+      #{redBall1,jdbcType=VARCHAR}, #{redBall2,jdbcType=VARCHAR}, #{redBall3,jdbcType=VARCHAR},
+      #{redBall4,jdbcType=VARCHAR}, #{redBall5,jdbcType=VARCHAR}, #{redBall6,jdbcType=VARCHAR},
+      #{blueBall,jdbcType=VARCHAR}, #{firstItems,jdbcType=BIGINT}, #{firstAward,jdbcType=BIGINT},
+      #{secondItems,jdbcType=BIGINT}, #{secondAward,jdbcType=BIGINT}, #{totalAward,jdbcType=BIGINT},
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="Lottery">
+        insert into tbl_lottery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="lotteryNo != null">
+                lottery_no,
+            </if>
+            <if test="lotteryDate != null">
+                lottery_date,
+            </if>
+            <if test="redBall1 != null">
+                red_ball1,
+            </if>
+            <if test="redBall2 != null">
+                red_ball2,
+            </if>
+            <if test="redBall3 != null">
+                red_ball3,
+            </if>
+            <if test="redBall4 != null">
+                red_ball4,
+            </if>
+            <if test="redBall5 != null">
+                red_ball5,
+            </if>
+            <if test="redBall6 != null">
+                red_ball6,
+            </if>
+            <if test="blueBall != null">
+                blue_ball,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="lotteryNo != null">
+                #{lotteryNo,jdbcType=INTEGER},
+            </if>
+            <if test="lotteryDate != null">
+                #{lotteryDate,jdbcType=VARCHAR},
+            </if>
+            <if test="redBall1 != null">
+                #{redBall1,jdbcType=INTEGER},
+            </if>
+            <if test="redBall2 != null">
+                #{redBall2,jdbcType=INTEGER},
+            </if>
+            <if test="redBall3 != null">
+                #{redBall3,jdbcType=INTEGER},
+            </if>
+            <if test="redBall4 != null">
+                #{redBall4,jdbcType=INTEGER},
+            </if>
+            <if test="redBall5 != null">
+                #{redBall5,jdbcType=INTEGER},
+            </if>
+            <if test="redBall6 != null">
+                #{redBall6,jdbcType=INTEGER},
+            </if>
+            <if test="blueBall != null">
+                #{blueBall,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="Lottery">
+        update tbl_lottery
+        <set>
+            <if test="lotteryNo != null">
+                lottery_no = #{lotteryNo,jdbcType=INTEGER},
+            </if>
+            <if test="lotteryDate != null">
+                lottery_date = #{lotteryDate,jdbcType=VARCHAR},
+            </if>
+            <if test="redBall1 != null">
+                red_ball1 = #{redBall1,jdbcType=INTEGER},
+            </if>
+            <if test="redBall2 != null">
+                red_ball2 = #{redBall2,jdbcType=INTEGER},
+            </if>
+            <if test="redBall3 != null">
+                red_ball3 = #{redBall3,jdbcType=INTEGER},
+            </if>
+            <if test="redBall4 != null">
+                red_ball4 = #{redBall4,jdbcType=INTEGER},
+            </if>
+            <if test="redBall5 != null">
+                red_ball5 = #{redBall5,jdbcType=INTEGER},
+            </if>
+            <if test="redBall6 != null">
+                red_ball6 = #{redBall6,jdbcType=INTEGER},
+            </if>
+            <if test="blueBall != null">
+                blue_ball = #{blueBall,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="Lottery">
+    update tbl_lottery
+    set lottery_no = #{lotteryNo,jdbcType=INTEGER},
+      lottery_date = #{lotteryDate,jdbcType=VARCHAR},
+      red_ball1 = #{redBall1,jdbcType=INTEGER},
+      red_ball2 = #{redBall2,jdbcType=INTEGER},
+      red_ball3 = #{redBall3,jdbcType=INTEGER},
+      red_ball4 = #{redBall4,jdbcType=INTEGER},
+      red_ball5 = #{redBall5,jdbcType=INTEGER},
+      red_ball6 = #{redBall6,jdbcType=INTEGER},
+      blue_ball = #{blueBall,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
